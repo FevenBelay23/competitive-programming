@@ -15,4 +15,7 @@ class Solution:
                 q.pop()
             q.append(i)
         
-        return ans if ans <= n else -1
+        if ans <= n:
+            return ans
+        else: 
+            return -1
