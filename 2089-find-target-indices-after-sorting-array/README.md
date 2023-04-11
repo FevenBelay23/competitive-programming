@@ -36,4 +36,4 @@ The index where nums[i] == 5 is 4.
 	<li><code>1 &lt;= nums.length &lt;= 100</code></li>
 	<li><code>1 &lt;= nums[i], target &lt;= 100</code></li>
 </ul>
-</div>
+</div> 
