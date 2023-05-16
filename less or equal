@@ -1,0 +1,14 @@
+n, k = [int(i) for i in input().strip().split()]
+a = [int(i) for i in input().strip().split()]
+a.sort()
+result = -1
+if k == n:
+  result = a[k - 1]
+else:  
+  result = a[k] - 1
+if result == 0:
+  result = -1
+if k > 0:
+  if result < a[k - 1]:
+    result = -1
+print(result)  
