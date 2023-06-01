@@ -1,14 +1,12 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        @cache
-        def uniquePathsRec(coord):
-            row , col = coord
-            if coord == (m - 1,n - 1):
-                return 1
-            ways = 0
-            if row + 1 < m:
-                ways += uniquePathsRec((row + 1, col))
-            if col + 1 < n:
-                ways += uniquePathsRec((row, col + 1))
-            return ways
-        return uniquePathsRec((0,0))
+        dp = [[0 for _ in range(n)] for _ in range(m)]
+        dp[-1][-1] = 1
+        def paths(i, j):
+            if 0 <= i < m and 0 <= j < n:
+                return dp[i][j]
+            return 0
+        for column in range(n - 1, -1, -1):
+            for row in range(m - 1, -1, -1):
+                dp[row][column] += paths(row + 1, column) + paths(row, column + 1)
+        return dp[0][0]
