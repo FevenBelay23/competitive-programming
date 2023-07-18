@@ -13,7 +13,7 @@ class Solution:
         while n > 2:
             count = len(root)
             n -= count
-            for _ in range(count):
+            for k in range(count):
                 leaf = root.popleft()
                 neighbor = graph[leaf].pop()
                 graph[neighbor].remove(leaf) 
