@@ -1,25 +1,22 @@
 class Solution:
-    def can_reach(self,graph, start, target):
-        queue = deque([start])
-        visited = set()
-        while queue:
-            node = queue.popleft()
+    def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        graph = [[] for _ in range(numCourses)]
+        for i, j in prerequisites:
+            graph[i].append(j)
+        def dfs(node, target):
             if node == target:
                 return True
-            if node in visited:
-                continue
-            visited.add(node)
-            queue.extend(graph[node])
-        return False
-
-    def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
-        graph = defaultdict(list)
-        for i in prerequisites:
-            graph[i[0]].append(i[1])
+            visited[node] = True
+            for k in graph[node]:
+                if not visited[k] and dfs(k, target):
+                    return True
+            return False
         answer = []
-        for j in queries:
-            start, target = j[0], j[1]
-            answer.append(self.can_reach(graph, start, target))
+        for query in queries:
+            first, last = query
+            visited = [False] * numCourses
+            if dfs(first, last):
+                answer.append(True)
+            else:
+                answer.append(False)
         return answer
-
-
