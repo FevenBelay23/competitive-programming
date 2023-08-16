@@ -1,0 +1,26 @@
+n, m = map(int, input().split())
+Row = {}
+Column = {}
+List = []
+for i in range(n):
+    temp = input()
+    List.append(temp)
+    Row[i] = temp
+for i in range(m):
+    jd = ""
+    for j in range(n):
+        jd += List[j][i]
+    Column[i] = jd
+result = ""
+for i in range(n):
+    for j in range(m):
+        count = 0
+        for k in Column[j]:
+            if List[i][j] == k:
+                count += 1
+        for l in Row[i]:
+            if List[i][j] == l:
+                count += 1
+        if count <= 2:
+            result += List[i][j]
+print(result)
