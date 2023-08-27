@@ -1,0 +1,10 @@
+t = int(input())
+for _ in range(t):
+	n=int(input())
+	if(n==1):
+		print(3)
+	else:
+		x = n&-n
+		while(x==n or (x&n)==0):
+			x+=1
+		print(x)
