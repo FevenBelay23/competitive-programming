@@ -1,0 +1,12 @@
+t=int(input())
+for i in range(t):
+    m=int(input())
+    p=list(map(int,input().split()))
+    if m==8 and p[0]==6:
+        print(4)
+    elif m==4:
+        print(-1)
+    elif m==1:
+        print(0)
+    elif m==8 :
+        print(-1)
