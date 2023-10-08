@@ -1,22 +1,25 @@
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
-        graph = [[] for _ in range(numCourses)]
+        graph = defaultdict(list)
+        prereq = defaultdict(set)
         for i, j in prerequisites:
             graph[i].append(j)
-        def dfs(node, target):
-            if node == target:
-                return True
-            visited[node] = True
-            for k in graph[node]:
-                if not visited[k] and dfs(k, target):
-                    return True
-            return False
-        answer = []
-        for query in queries:
-            first, last = query
-            visited = [False] * numCourses
-            if dfs(first, last):
-                answer.append(True)
-            else:
-                answer.append(False)
-        return answer
+            prereq[j].add(i)
+        result = {}
+        for course, tar in queries:
+            if course not in result:
+                visited = set()
+                queue = deque([course])
+                match = False
+                while queue:
+                    current = queue.popleft()
+                    if current == tar:
+                        match = True
+                        break
+                    for neighbor in graph[current]:
+                        if neighbor not in visited:
+                            visited.add(neighbor)
+                            queue.append(neighbor)
+                result[(course, tar)] = match
+        return [result[(course, tar)] for course, tar in queries]
+        
