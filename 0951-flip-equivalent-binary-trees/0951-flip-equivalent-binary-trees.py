@@ -12,10 +12,5 @@ class Solution:
             return False
         if root1.val != root2.val:
             return False
-        flipped = self.flipEquiv(root1.left , root2.right) and self.flipEquiv(root1.right , root2.left)
-        Not_flipped = self.flipEquiv(root1.left,root2.left) and self.flipEquiv(root1.right , root2.right)
-        return flipped or Not_flipped
-        
-       
-        
-        
+        return (self.flipEquiv(root1.left, root2.left) and self.flipEquiv(root1.right, root2.right)) or \
+               (self.flipEquiv(root1.left, root2.right) and self.flipEquiv(root1.right, root2.left))
