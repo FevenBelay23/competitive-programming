@@ -1,13 +1,17 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        n = len(s)
-        dp = [False] * (n + 1)
-        dp[0] = True
+        queue = deque([0])
+        visited = [False] * len(s)
 
-        for i in range(1, n + 1):
-            for word in wordDict:
-                if len(word) <= i and dp[i - len(word)] and s[i - len(word):i] == word:
-                    dp[i] = True
-                    break
+        while queue:
+            start = queue.popleft()
+            if not visited[start]:
+                for end in range(start + 1, len(s) + 1):
+                    if s[start:end] in wordDict:
+                        if end == len(s):
+                            return True
+                        queue.append(end)
+                visited[start] = True
 
-        return dp[n]
+        return False
+    
